@@ -44,4 +44,4 @@ Klavye odakları, ana içeriğe atlama, tab ok tuşları, form etiketleri, metin
 
 ## Dağıtım sınırı
 
-Bu sürüm yalnızca yerel tamamlanmış statik ürün hazırlığıdır. Kimlik doğrulama, sunucu verisi, model eğitimi, entegrasyon, anlamsal arama, cihazlar arası senkronizasyon ve gerçek dünyanın doğruluğunu teyit eden hizmet içermez.
+Bu sürüm yerelde veya Free Azure Static Web Apps üzerinde yayımlanabilen bağımsız statik uygulamadır. GitHub Actions doğrulanmış dist paketini yayımlar; release.json kimlik ve dosya özetiyle canlı sürümü doğrular. Kimlik doğrulama, sunucu verisi, model eğitimi, entegrasyon, anlamsal arama, cihazlar arası senkronizasyon ve gerçek dünyanın doğruluğunu teyit eden hizmet içermez.

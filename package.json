@@ -7,11 +7,12 @@
     "dev": "vite --host 127.0.0.1 --port 8041 --strictPort",
     "dev:codex": "node scripts/server.mjs start",
     "stop:codex": "node scripts/server.mjs stop",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/release.mjs && node scripts/verify-artifact.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "validate:codex": "npm run test && npm run build && npm run test:e2e",
-    "preview": "vite preview --host 127.0.0.1 --port 8042 --strictPort"
+    "preview": "vite preview --host 127.0.0.1 --port 8042 --strictPort",
+    "verify:live": "node scripts/verify-live.mjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",

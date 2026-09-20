@@ -513,8 +513,8 @@ export default function App() {
           </span>
           <small>
             {t(
-              "Planlanan alan adı: mem.aserdargun.com · Yerel sürüm",
-              "Planned domain: mem.aserdargun.com · Local edition",
+              "Planlanan alan adı: mem.aserdargun.com · Veriler bu tarayıcıda",
+              "Planned domain: mem.aserdargun.com · Data stays in this browser",
             )}
           </small>
         </div>

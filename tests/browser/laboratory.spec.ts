@@ -371,8 +371,9 @@ test("arrow-key tabs, reduced motion, and self-hosted assets", async ({
       .evaluate((el) => getComputedStyle(el).transitionDuration),
   ).toBe("0s");
   const remote: string[] = [];
+  const currentOrigin = new URL(page.url()).origin;
   page.on("request", (r) => {
-    if (!r.url().startsWith("http://127.0.0.1:8042/")) remote.push(r.url());
+    if (new URL(r.url()).origin !== currentOrigin) remote.push(r.url());
   });
   await page.reload();
   await page.evaluate(() => document.fonts.ready);
