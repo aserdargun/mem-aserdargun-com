@@ -31,7 +31,12 @@ import { Methods } from "./components/Methods";
 import { CreateRecord } from "./components/CreateRecord";
 export default function App() {
   const [loaded] = useState(load);
-  const [state, setState] = useState(loaded.state);
+  const [state, setState] = useState<typeof loaded.state>(() => {
+    const language = new URLSearchParams(window.location.search).get("lang");
+    return language === "en" || language === "tr"
+      ? { ...loaded.state, language }
+      : loaded.state;
+  });
   const [recovered, setRecovered] = useState(loaded.recovered);
   const [storageError, setStorageError] = useState(loaded.unavailable);
   const [page, setPage] = useState<"lab" | "comparison" | "methods">("lab");
