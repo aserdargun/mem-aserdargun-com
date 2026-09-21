@@ -232,6 +232,22 @@ input:invalid {
   gap: 18px;
   color: #f2f6ed;
 }
+.portfolio-nav {
+  max-width: 1800px;
+  margin: auto;
+  padding: 14px clamp(16px, 3vw, 32px) 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.portfolio-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+}
 .brand:hover {
   text-decoration: none;
 }
@@ -1222,12 +1238,23 @@ footer button {
   gap: 12px;
   margin-top: 22px;
 }
-.ecosystem > div {
+.ecosystem > a {
   border-left: 2px solid #4e6839;
   padding: 10px 15px;
   display: flex;
   gap: 16px;
   align-items: center;
+}
+.ecosystem > a:hover {
+  background: var(--panel);
+}
+.ecosystem svg {
+  flex-shrink: 0;
+}
+.ecosystem small {
+  display: block;
+  margin-top: 6px;
+  line-height: 1.6;
 }
 .ecosystem b {
   font: 14px var(--mono);

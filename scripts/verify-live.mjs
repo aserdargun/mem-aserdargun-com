@@ -6,8 +6,9 @@ if (!raw) throw new Error("MEM_BASE_URL must identify the deployed site");
 const base = new URL(raw);
 assert.equal(base.protocol, "https:");
 assert(
-  base.hostname.endsWith(".azurestaticapps.net"),
-  "Expected Azure-generated hostname",
+  base.hostname === "yellow-pebble-060d84e03.1.azurestaticapps.net" ||
+    base.hostname === "mem.aserdargun.com",
+  "Expected the MEM custom domain or its verified Azure hostname",
 );
 const expected =
   process.env.GITHUB_SHA ||

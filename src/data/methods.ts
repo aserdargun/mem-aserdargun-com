@@ -29,7 +29,7 @@ export const lessons = [
       "Retrieval is not verification.",
     ),
     body: L(
-      "Bir sorguyla eşleşmek bir iddiayı doğru yapmaz. MEM eşleşme puanını doğruluk olasılığı olarak kullanmaz. İki farklı kaynak aynı iddiayı tekrar etse bile bağımsız kanıt sayılmaz.",
+      "Bir sorguyla eşleşmek bir iddiayı doğru yapmaz. MEM eşleşme puanını doğruluk olasılığı olarak kullanmaz. İki farklı kaynakta aynı iddianın bulunması, kaynakların bağımsız olduğunu tek başına göstermez.",
       "Matching a query does not make a claim true. MEM does not treat a matching score as a probability of truth. Two sources repeating a claim are not necessarily independent evidence.",
     ),
   },
@@ -75,7 +75,7 @@ export const references = [
     publisher: "Anthropic",
     url: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
     published: "2025-09-29",
-    accessed: "2026-09-20",
+    accessed: "2026-09-21",
     note: L(
       "Bağlam seçimi ve yapılandırılmış not tutma üzerine birincil kaynak. MEM’nin kuralları kendi öğretim tasarımıdır.",
       "Primary source for context selection and structured note-taking. MEM’s rules are its own educational design.",
@@ -86,7 +86,7 @@ export const references = [
     publisher: "LangChain",
     url: "https://docs.langchain.com/oss/javascript/concepts/memory",
     published: null,
-    accessed: "2026-09-20",
+    accessed: "2026-09-21",
     note: L(
       "Oturum kapsamlı ve oturumlar arası bellek; olgu, deneyim ve işlem örüntüsü kategorileri. İnsan belleğiyle birebir eşdeğerlik veya zorunlu mimari değildir.",
       "Session-scoped and cross-session memory; facts, experiences and procedure patterns. These are neither exact human-memory equivalents nor a mandatory architecture.",
@@ -97,7 +97,7 @@ export const references = [
     publisher: "LangChain / LangGraph",
     url: "https://docs.langchain.com/oss/javascript/langgraph/persistence",
     published: null,
-    accessed: "2026-09-20",
+    accessed: "2026-09-21",
     note: L(
       "Durum kalıcılığı ve kontrol noktası kavramları. MEM LangGraph kullanmaz; tarayıcıda sürümlü JSON saklar.",
       "State persistence and checkpoint concepts. MEM does not use LangGraph; it stores versioned JSON in the browser.",

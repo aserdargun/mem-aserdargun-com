@@ -1,5 +1,6 @@
 import { ArrowUpRight, ArrowRight, BookOpen } from "lucide-react";
 import { lessons, references } from "../data/methods";
+import { relatedApps, portfolioUrl } from "../data/portfolio";
 import type { Language } from "../domain/model";
 export function Methods({
   lang,
@@ -114,8 +115,34 @@ export function Methods({
         </p>
         <p>
           {t(
-            "Sayfa yenileme deneyleri ve dili korur. Depolama bu tarayıcı ve origin ile sınırlıdır. Yeni oturum kalıcı kayıtları korur; silme sürüm zincirini ve türevleri kaldırır. Bozuk veya eski şema için kurtarma bildirimi gösterilir. Serbest kullanıcı metni çevrilmez; iki dilde de aynen görünür.",
-            "Reloading preserves experiments and language. Storage is limited to this browser and origin. New sessions keep persistent records; deletion removes revision chains and derivatives. Corrupt or old schemas show a recovery notice. User-entered text is not translated and appears verbatim in both languages.",
+            "Sayfa yenileme deneyleri ve dili korur. Yeni oturum, uygulama içindeki bir eylemdir; sekmeyi kapatıp açmak değildir. Depolama bu tarayıcı ve site adresiyle sınırlıdır: özel alan adı, Azure adresi ve yerel önizleme arasında kayıtlar eşitlenmez. JSON dışa aktarılabilir; içe aktarma yoktur. Yeni oturum kalıcı kayıtları korur; silme sürüm zincirini ve türevleri kaldırır. Bozuk veya eski şema için kurtarma bildirimi gösterilir. Serbest kullanıcı metni çevrilmez; iki dilde de aynen görünür.",
+            "Reloading preserves experiments and language. New session is an in-app action, not closing and reopening a tab. Storage is limited to this browser and site origin: the custom domain, Azure hostname and local preview do not synchronize records. JSON export is available; import is not. New sessions keep persistent records; deletion removes revision chains and derivatives. Corrupt or old schemas show a recovery notice. User-entered text is not translated and appears verbatim in both languages.",
+          )}
+        </p>
+      </section>
+      <section className="method-block">
+        <h2>
+          {t(
+            "Deney saati ve geri çağırma puanı",
+            "Experiment clock and retrieval score",
+          )}
+        </h2>
+        <p>
+          {t(
+            "Senaryolar 1 Eylül 2026, 09.00 UTC’de başlar; bu tarih bugünün tarihi değildir. Adımlama ve sayfa yenileme deney saatini ilerletmez. Saati +1 gün ilerlet eylemi tam 24 saat ekler. Süreli atama 2 Eylül 09.00 UTC’de sona erer.",
+            "Scenarios start at 09:00 UTC on 1 September 2026; this is not today’s date. Stepping and reloading do not advance the experiment clock. Advance +1 day adds exactly 24 hours. The time-limited assignment expires at 09:00 UTC on 2 September.",
+          )}
+        </p>
+        <p>
+          {t(
+            "Puan = eşleşen farklı sözcük sayısı + 3 × eşleşen etiket sayısı + kayıt sırası / toplam kayıt sayısı. Seçici politika ayrıca 4 × önem ekler. Kayıt sırası, olayın güncelliğini veya doğruluğunu kanıtlamaz. Kapsam, oturum, süre ve çelişki kontrollerinden elenen kayıtlar yüksek puanla bile bağlama giremez.",
+            "Score = distinct matching words + 3 × matching tags + insertion position / total records. Selective memory also adds 4 × importance. Insertion order does not prove an event is current or true. Records excluded by scope, session, validity or conflict checks cannot enter context even with a high score.",
+          )}
+        </p>
+        <p>
+          {t(
+            "Hazır soru iki dilde aynı senaryo etiketlerini kullanır. Soruyu düzenlediğinizde iki dildeki kayıt metinleri ve etiketler üzerinde sözcük eşleşmesi yapılır; anlamsal çıkarım yapılmaz. Karşılaştırma, laboratuvarda değiştirdiğiniz soru veya bütçe yerine senaryonun hazır sorusunu ve kayıt bütçesini kullanır; seçili eşik ve silme işaretleri aktarılır.",
+            "The preset question uses the same scenario tags in both languages. Editing it switches to word matching against both languages’ record text and tags, without semantic inference. Comparison uses the scenario’s preset query and record budget rather than your edited question or budget; the selected threshold and deletion markers carry over.",
           )}
         </p>
       </section>
@@ -123,49 +150,31 @@ export function Methods({
         <h2>{t("CTX içindeki yeri", "Within CTX")}</h2>
         <p>
           {t(
-            "CTX kaynaklardan çalışma bağlamına uzanan bilgi akışını inceler. MEM, bu akışta oturumlar arası bilginin yaşam döngüsüne odaklanır. Aşağıdaki ilişkiler kavramsaldır; bağlı servis veya veri alışverişi yoktur.",
-            "CTX studies information flow from sources to working context. MEM focuses on the lifecycle of cross-session information in that flow. These relationships are conceptual; there are no connected services or data exchanges.",
+            "MEM, aserdargun.com öğrenme sisteminde CTX altındaki ajan belleği laboratuvarıdır. CTX kaynaklardan çalışma bağlamına uzanan bilgi akışını, MEM ise oturumlar arası bilginin yaşam döngüsünü inceler. Aşağıdaki bağlantılar ayrı öğrenme uygulamalarını açar; deneyleriniz, kayıtlarınız ve sorularınız aktarılmaz.",
+            "MEM is the agent memory laboratory under CTX in the aserdargun.com learning system. CTX explores information flow from sources to working context; MEM studies the lifecycle of cross-session information. The links below open separate learning applications; your experiments, records and queries are not transferred.",
           )}
         </p>
         <div className="ecosystem">
-          {[
-            [
-              "CTX",
-              t(
-                "Bağlam ve bilgi mühendisliği",
-                "Context & knowledge engineering",
-              ),
-            ],
-            ["ARL", t("Ajan çalışma zamanı", "Agent runtime")],
-            [
-              "DPL",
-              t(
-                "Karar yolu ve değerlendirme çabası",
-                "Decision path & deliberation effort",
-              ),
-            ],
-            [
-              "CUL",
-              t("Arayüz üzerinden eylemler", "Actions through interfaces"),
-            ],
-            [
-              "SEC",
-              t(
-                "Güvenlik ve yetki sınırları",
-                "Security & permission boundaries",
-              ),
-            ],
-            [
-              "EVL",
-              t("Değerlendirme ve güvenilirlik", "Evaluation & reliability"),
-            ],
-          ].map(([code, desc]) => (
-            <div key={code}>
-              <b>{code}</b>
-              <span>{desc}</span>
-            </div>
+          {relatedApps.map((app) => (
+            <a key={app.code} href={app.href(lang)}>
+              <b>{app.code}</b>
+              <span>
+                {app.title[lang]}
+                <small>{app.lesson[lang]}</small>
+              </span>
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
           ))}
         </div>
+        <p>
+          <a href={portfolioUrl(lang)}>
+            {t(
+              "Tüm öğrenme sistemini keşfet",
+              "Explore the full learning system",
+            )}{" "}
+            →
+          </a>
+        </p>
       </section>
       <section className="method-block">
         <h2>{t("Birincil kaynaklar", "Primary sources")}</h2>

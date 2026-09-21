@@ -1,5 +1,17 @@
 # Yerel doğrulama / Local validation
 
+## 21 Eylül 2026 — İçerik ve portföy uyumu
+
+- `npm run test`: **33/33** alan testi geçti.
+- `npm run build`: TypeScript, Vite ve 12 dosyalı statik paket/manifest doğrulaması geçti.
+- `npm run test:e2e`: üretim paketi üzerinde **27/27** Chromium testi geçti; altı senaryo, TR/EN, üç politika, kalıcılık, düzeltme/silme ve kurtarma akışları korundu.
+- Ek Chromium kontrolü: `http://127.0.0.1:8041` üzerinde 320/390/768/1440 px ve iki dilde portföy/CTX adresleri, altı ilgili uygulama bağlantısı, yeni yöntem bölümü, dil/sayfa değişiminde kayıt korunması ve yeniden yükleme açıklaması doğrulandı. Sayfa kimliği doğru; boş ekran, Vite hata katmanı, yatay taşma, console.error, console.warning veya pageerror görülmedi. Browser plugin/skill listelenmediği için mevcut Playwright kullanıldı.
+- Masaüstü laboratuvarı, TR portföy bölümü ve EN mobil portföy bölümü ekran görüntüleri incelendi; kesilme/örtüşme görülmedi. Görseller depo dışında `/tmp/mem-content-*.png` dosyalarındadır.
+- Canlı adresler: MEM özel alan adı, Azure adresi, ana portföy ve altı ilgili uygulama HTTPS 200 döndürdü. MEM'in iki adresinde mevcut sürüm kimliği `3336e63b05a5231032c7d7269eb79a3306186bda` eşleşti. Kaynak defterindeki üç teknik yayın tekrar açıldı.
+- Bu kontroller yerel içerik değişikliklerini ve mevcut canlı adresleri kapsar. Yeni değişiklikler yayımlanmadı; Azure/DNS yapılandırması değiştirilmedi. Safari, Firefox ve fiziksel telefon bu turda sınanmadı. Aşağıdaki 20 Eylül kaydı tarihsel kanıttır; kurulum/audit/sunucu durdurma kontrolleri bu turda tekrarlanmadı.
+
+## 20 Eylül 2026 — İlk doğrulama kaydı
+
 Tarih: **2026-09-20**. Ortam: macOS, Node.js 22.23.1, npm 10.9.8. Uygulama: `http://127.0.0.1:8041`; üretim paketi tarayıcı testleri: `http://127.0.0.1:8042`.
 
 ## Sonuç

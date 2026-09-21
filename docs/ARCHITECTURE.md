@@ -10,6 +10,7 @@
 - `persistence.ts`: Sürüm 1 yerel şema, yapısal/ilişkisel yükleme doğrulaması, kurtarma ve JSON dışa aktarımı.
 - `comparison.ts`: Aynı başlangıç ve olay dizisini ayrı saf depolarda çalıştırma. Canlı kullanıcı kayıtlarına erişmez.
 - `src/data`: Altı sürümlü senaryo, öğrenme bölümleri ve doğrulanmış birincil kaynak metaverisi.
+- `src/data/portfolio.ts`: Ana portföy, CTX üst alanı ve altı ilgili uygulama için dil uyumlu öğrenme bağlantıları; deney verisi aktarmaz.
 - `src/i18n.ts`: Durum, gerekçe, politika, tür ve UTC zaman yerelleştirmesi. `LocalText` senaryo ve öğretim metnini iki dilde taşır.
 - `src/components`: Kontroller, yaşam döngüsü/kayıtlar, ayrıntılar, zaman çizelgesi, karşılaştırma, öğrenme ve kullanıcı adayı formu.
 - `src/App.tsx`: Deney deposu, arayüz durumu ve kullanıcı eylemlerinin orkestrasyonu.

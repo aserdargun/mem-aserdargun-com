@@ -1,6 +1,6 @@
 # Kaynak defteri / Source ledger
 
-Erişim ve doğrulama tarihi: **2026-09-20**. Aşağıdaki sayfalar bu çalışma sırasında açılarak incelendi. Kaynak kavramları ile MEM'nin kendi deterministik öğretim kuralları ayrıdır. Kaynaklar hiçbir politika sonucu için genel başarı iddiası oluşturmaz.
+Erişim ve doğrulama tarihi: **2026-09-21**. Aşağıdaki sayfalar bu çalışma sırasında açılarak incelendi. Kaynak kavramları ile MEM'nin kendi deterministik öğretim kuralları ayrıdır. Kaynaklar hiçbir politika sonucu için genel başarı iddiası oluşturmaz.
 
 | Başlık | Yayıncı | Yayın tarihi | URL | Kullanımı |
 | --- | --- | --- | --- | --- |
@@ -18,4 +18,8 @@ MEM, bu framework'leri çalıştırmaz. Kaynakların anlattığı üretim mimari
 - **Kullanıcı girdisi:** Açıkça oluşturulan/düzeltilen yerel kayıt metni; iki dilde aynen gösterilir ve dışarı gönderilmez.
 - **Deney sonucu:** Gerçek alan motorunun kayıtları, eleme gerekçeleri ve bağlam sayımları. Gerçek model zekâsı, token tasarrufu veya üretim performansı değildir.
 
-Komşu uygulamalara doğrulanmamış URL bağlantısı eklenmedi. CTX/ARL/DPL/CUL/SEC/EVL yalnızca kavramsal haritada açıklanır. `mem.aserdargun.com` planlanan adres olarak etiketlidir.
+## Portföy bağlantıları
+
+21 Eylül 2026 tarihinde `aserdargun.com` (EN kök ve `/tr/`), `mem.aserdargun.com`, CTX (`/en/pipeline`, `/tr/pipeline`), ARL, DPL, CUL, SEC (`/en`, `/tr`) ve EVL (`/en`, `/tr`) HTTPS adresleri açılarak 200 yanıtları doğrulandı. MEM ve Azure adresinin `release.json` kimlikleri eşleşti.
+
+MEM → CTX ilişkisi ana portföyün `data/system-focus.json` kaydıyla uyumludur. `src/data/portfolio.ts` bu uygulamadaki öğrenme bağlantılarını tutar. CTX/SEC/EVL bağlantıları seçili dilde açılır; ARL/DPL/CUL kendi dil seçicilerini kullanır. Bağlantılar servis entegrasyonu veya veri alışverişi değildir; deney kayıtları URL’ye eklenmez.

@@ -20,6 +20,7 @@ import {
 } from "./domain/persistence";
 import type { ExperimentRun, Language, MemoryPolicy } from "./domain/model";
 import { getScenario } from "./data/scenarios";
+import { portfolioUrl, contextUrl } from "./data/portfolio";
 import { Controls } from "./components/Controls";
 import { Workspace } from "./components/Workspace";
 import type { View } from "./components/Workspace";
@@ -235,6 +236,18 @@ export default function App() {
           ))}
         </div>
       </header>
+      <nav
+        className="portfolio-nav"
+        aria-label={t("Öğrenme sistemi", "Learning system")}
+      >
+        <a href={portfolioUrl(lang)}>aserdargun.com</a>
+        <span aria-hidden="true">/</span>
+        <a href={contextUrl(lang)}>
+          {t("CTX · Bağlam ve bilgi", "CTX · Context & knowledge")}
+        </a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">MEM</span>
+      </nav>
       <main id="main" ref={main} tabIndex={-1}>
         {recovered && (
           <div className="banner warning" role="alert">
@@ -462,8 +475,8 @@ export default function App() {
             </h2>
             <p>
               {t(
-                "Bu işlem seçili deneydeki silme işaretlerini kaldırır ve kurgusal senaryo adaylarını yeniden kullanılabilir yapar. Kullanıcı kayıtları geri getirilmez.",
-                "This clears deletion markers for the selected experiment and makes fictional scenario candidates available again. User records are not restored.",
+                "Bu işlem seçili deneyin mevcut kayıtlarını ve ilerleyişini temizler, silme işaretlerini kaldırır ve kurgusal senaryo adaylarını başa alır. Kendi kayıtlarınız silinir ve geri getirilemez; saklamak için önce JSON dışa aktarın. Diğer deneyler etkilenmez.",
+                "This clears the selected experiment’s current records and progress, removes deletion markers and restarts the fictional scenario candidates. Your own records are deleted and cannot be restored; export JSON first to keep a copy. Other experiments are unaffected.",
               )}
             </p>
             <div className="button-pair">
@@ -513,8 +526,8 @@ export default function App() {
           </span>
           <small>
             {t(
-              "Planlanan alan adı: mem.aserdargun.com · Veriler bu tarayıcıda",
-              "Planned domain: mem.aserdargun.com · Data stays in this browser",
+              "mem.aserdargun.com · Deneyler bu tarayıcı ve site adresinde saklanır",
+              "mem.aserdargun.com · Experiments are stored in this browser and site origin",
             )}
           </small>
         </div>

@@ -12,8 +12,8 @@ export const policyNames: Record<MemoryPolicy, ReturnType<typeof L>> = {
 };
 export const policyInfo: Record<MemoryPolicy, ReturnType<typeof L>> = {
   session: L(
-    "Kayıtlar bu oturumla sınırlı. Yeni oturumda geri çağrılmaz.",
-    "Records are scoped to this session. A new session cannot recall them.",
+    "Kayıtlar bu oturumla sınırlı. Yeni oturum eyleminden sonra geri çağrılmaz; sayfa yenilemek yeni oturum açmaz.",
+    "Records are scoped to this session. The New session action makes them unavailable; reloading the page does not start a session.",
   ),
   simple: L(
     "Kalıcı bilgiler saklanır; sözcük eşleşmesi ve kayıt sırası kullanılır. Tek seferlik istek oturumda kalır.",
@@ -66,7 +66,7 @@ export const retentionNames: Record<string, ReturnType<typeof L>> = {
     "Stored because it is a durable candidate.",
   ),
   threshold: L(
-    "Önem değeri saklama eşiğini geçti.",
+    "Önem değeri saklama eşiğini karşıladı.",
     "Importance meets the retention threshold.",
   ),
   correction: L(

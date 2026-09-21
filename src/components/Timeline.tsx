@@ -28,7 +28,9 @@ export function Timeline({
           <Clock size={17} />
           {t("Olay zaman çizelgesi", "Event timeline")}
         </h2>
-        <span className="mono">{date(run.clock, lang)} UTC</span>
+        <span className="mono">
+          {t("Deney saati", "Experiment clock")}: {date(run.clock, lang)} UTC
+        </span>
       </div>
       <div className="timeline-body">
         <div className="events" aria-label={t("Olay günlüğü", "Event log")}>
@@ -93,7 +95,7 @@ export function Timeline({
           )}
           <p className="hint">
             {t(
-              "Yeni görev belleği korur. Yeni oturum kalıcı belleği korur. Reset silme işaretlerini koruyarak başa döner.",
+              "Yeni görev belleği korur. Yeni oturum kalıcı belleği korur. Sıfırlama silme işaretlerini koruyarak başa döner.",
               "New tasks keep memory. New sessions keep persistent memory. Reset returns to the start while preserving deletion markers.",
             )}
           </p>

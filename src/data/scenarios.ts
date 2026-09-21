@@ -248,8 +248,8 @@ export const scenarios: Scenario[] = [
       candidate(
         "expiry-1",
         L(
-          "Deniz, Atlas destek sorumlusu; yalnızca 1 Eylül.",
-          "Deniz handles Atlas support on 1 September only.",
+          "Deniz, Atlas destek sorumlusu; 1 Eylül 09.00–2 Eylül 09.00 UTC.",
+          "Deniz handles Atlas support from 1 September 09:00 to 2 September 09:00 UTC.",
         ),
         "assignee",
         "deniz",
@@ -339,7 +339,7 @@ export const scenarios: Scenario[] = [
       "Information is not authorization.",
     ),
     lesson: L(
-      "Atlas ve Nova benzer kayıtlar içerir. Kaynak içindeki talimat reddedilir. Bir kaydı silin: içerik, sürümleri ve türetilmiş bağlam kaldırılır. Reset silinen kaydı geri getirmez.",
+      "Atlas ve Nova benzer kayıtlar içerir. Kaynak içindeki talimat reddedilir. Bir kaydı silin: içerik, sürümleri ve türetilmiş bağlam kaldırılır. Sıfırlama silinen kaydı geri getirmez.",
       "Atlas and Nova contain similar records. An instruction inside a source is rejected. Delete a record: its content, revisions and derived context are removed. Reset does not restore it.",
     ),
     events: [
