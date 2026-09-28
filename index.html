@@ -13,14 +13,42 @@
     <meta property="og:title" content="MEM — Agent Memory Laboratory" />
     <meta
       property="og:description"
-      content="Önemli olanı hatırla. Değişeni yeniden doğrula. / Remember what matters. Recheck what changes. A bilingual memory laboratory in the aserdargun.com learning system."
+      content="Explore agent memory across six synthetic scenarios and three memory policies: recall, source and version links, correction, expiry, deletion and JSON export."
     />
     <meta property="og:url" content="https://mem.aserdargun.com/" />
+    <meta property="og:site_name" content="aserdargun.com" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="MEM — Agent Memory Laboratory" />
+    <meta
+      name="twitter:description"
+      content="Explore agent memory across six synthetic scenarios and three memory policies: recall, source and version links, correction, expiry, deletion and JSON export."
+    />
     <link rel="icon" href="/favicon.svg" />
     <title>MEM — Agent Memory Laboratory</title>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div lang="en">
+        <h1>MEM — Agent Memory Laboratory</h1>
+        <p>
+          A deterministic laboratory for agent memory. The same candidate
+          records are written, recalled, corrected, expired and deleted under
+          three memory policies, so the difference between them stays visible.
+        </p>
+        <ul>
+          <li>Six synthetic scenarios covering preferences, projects, conflicts, expiry, noise and untrusted scope.</li>
+          <li>Three memory policies: session, simple and selective.</li>
+          <li>Recall with source and version links back to every record.</li>
+          <li>Correction, expiry, deletion and a memory inspector.</li>
+          <li>Policy comparison and JSON export of the run.</li>
+        </ul>
+        <p>
+          This interactive laboratory needs JavaScript. Every record is
+          synthetic teaching data; nothing here describes a real person.
+        </p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
