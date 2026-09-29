@@ -13,7 +13,7 @@ const schema = z.object({
 export type LaboratoryState = z.infer<typeof schema>;
 export const initialState = (): LaboratoryState => ({
   schemaVersion: 1,
-  language: "tr",
+  language: "en",
   selectedScenario: "preferences",
   selectedPolicy: "selective",
   runs: {},

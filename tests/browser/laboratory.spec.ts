@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
   page.on("console", (m) => {
     if (m.type() === "error") messages.push(m.text());
   });
-  await page.goto("/");
+  await page.goto("/?lang=tr");
   await expect(page).toHaveTitle("MEM — Agent Memory Laboratory");
 });
 test.afterEach(async ({ page }) => {
@@ -114,6 +114,8 @@ test("comparison uses isolated stores and selective policy can lose", async ({
 test("policy stores, new task, session policy and language persistence", async ({
   page,
 }) => {
+  // This covers persistence, so the entry route is used: a language chosen here
+  // has to survive a reload, which a query parameter would override.
   await steps(page, 1);
   await page
     .getByRole("combobox", { name: "Bellek politikası", exact: true })
@@ -130,10 +132,16 @@ test("policy stores, new task, session policy and language persistence", async (
   await page
     .getByRole("combobox", { name: "Bellek politikası", exact: true })
     .selectOption("selective");
+  // Language persistence has to be checked on the entry route: a query
+  // parameter is re-applied on every load and would mask the stored choice.
+  // The stored language survives the navigation, then switching to English and
+  // reloading has to survive it too.
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("lang", "tr");
   await page.getByRole("button", { name: "EN", exact: true }).click();
-  await expect(rows(page)).toContainText("Ada prefers");
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(rows(page)).toContainText("Ada prefers");
   await expect(rows(page)).toHaveCount(1);
   await page
     .getByRole("button", { name: "Recall & assemble context", exact: true })
