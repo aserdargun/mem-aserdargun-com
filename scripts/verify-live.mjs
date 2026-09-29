@@ -27,7 +27,9 @@ for (let attempt = 0; attempt < 20; attempt++) {
         break;
       }
     }
-  } catch {}
+  } catch {
+    // a transient fetch failure is retried by the next probe
+  }
   await new Promise((r) => setTimeout(r, 3000));
 }
 assert(release, `Live release does not match ${expected}`);

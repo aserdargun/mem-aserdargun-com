@@ -10,7 +10,8 @@
     "build": "tsc -b && vite build && node scripts/release.mjs && node scripts/verify-artifact.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "validate:codex": "npm run test && npm run build && npm run test:e2e",
+    "validate:codex": "npm run lint && npm run test && npm run build && npm run test:e2e",
+    "lint": "eslint .",
     "preview": "vite preview --host 127.0.0.1 --port 8042 --strictPort",
     "verify:live": "node scripts/verify-live.mjs"
   },
@@ -23,13 +24,17 @@
     "zod": "^4.1.5"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.55.0",
     "@types/node": "^22.18.6",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.3",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0",
     "prettier": "^3.9.8",
     "typescript": "^5.9.2",
+    "typescript-eslint": "^8.71.0",
     "vite": "^7.1.5",
     "vitest": "5.0.1"
   }

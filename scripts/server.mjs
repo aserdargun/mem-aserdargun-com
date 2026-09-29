@@ -92,7 +92,9 @@ if (action === "stop") {
         console.log(`MEM ready: http://127.0.0.1:${port}`);
         process.exit(0);
       }
-    } catch {}
+    } catch {
+      // the preview is not up yet; the poll below keeps waiting
+    }
   }
   throw Error("Preview did not start; inspect .local/server.log");
 } else throw Error("Use start or stop");
