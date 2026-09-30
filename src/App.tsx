@@ -535,6 +535,12 @@ export default function App() {
               "mem.aserdargun.com · Experiments are stored in this browser and site origin",
             )}
           </small>
+          <small>
+            {t(
+              "İçerik ve kaynaklar 2026-09-21 tarihinde incelendi. Bellek kuralları ve 0,65 eleme eşiği MEM’nin kendi öğretim tasarımıdır; ölçülmüş bir sonuç değildir.",
+              "Content and sources reviewed 2026-09-21. Memory rules and the 0.65 rejection threshold are MEM’s own educational design, not a measured result.",
+            )}
+          </small>
         </div>
         <button
           className="quiet"
