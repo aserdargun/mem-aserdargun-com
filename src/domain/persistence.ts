@@ -51,6 +51,7 @@ export function decode(raw: string | null): {
       if (
         ids.size !== run.records.length ||
         run.context?.recordIds.some((id) => !ids.has(id)) ||
+        run.context?.results.some((r) => !ids.has(r.id)) ||
         run.records.some((r) =>
           r.candidateIds.some((id) => run.tombstones.includes(id)),
         )

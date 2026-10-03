@@ -158,6 +158,18 @@ describe("memory lifecycle", () => {
     state.runs["preferences:selective"] = r;
     expect(decode(JSON.stringify(state)).recovered).toBe(true);
   });
+  it("rejects a recall that scores a record the run no longer holds", () => {
+    const state = initialState();
+    const r = query(execute(scenarios[0]), scenarios[0]);
+    r.context!.results.push({
+      id: "missing",
+      reason: "selected",
+      score: 99,
+      components: { words: 1, tags: 1, recency: 1, importance: 1 },
+    });
+    state.runs["preferences:selective"] = r;
+    expect(decode(JSON.stringify(state)).recovered).toBe(true);
+  });
   it("round-trips local state", () => {
     const state = initialState();
     state.runs["preferences:selective"] = execute(scenarios[0]);
