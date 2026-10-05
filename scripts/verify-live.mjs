@@ -60,6 +60,7 @@ for (const file of release.files.filter(
   if (file.path.endsWith(".js")) assert(/javascript/.test(type));
   if (file.path.endsWith(".css")) assert(type.includes("text/css"));
   if (file.path.endsWith(".svg")) assert(type.includes("image/svg+xml"));
+  if (file.path.endsWith(".png")) assert(type.includes("image/png"));
   if (file.path.endsWith(".woff2")) assert(/woff2|octet-stream/.test(type));
 }
 console.log(
