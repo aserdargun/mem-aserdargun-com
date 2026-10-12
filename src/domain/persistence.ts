@@ -57,6 +57,15 @@ export function decode(raw: string | null): {
         )
       )
         throw Error("references");
+      // `used` is derived from the listed record IDs and capped by the budget.
+      // A stored count that disagrees is not a measurement, so it is rejected
+      // rather than displayed as the task result.
+      if (
+        run.context &&
+        (run.context.used !== run.context.recordIds.length ||
+          run.context.used > run.context.budget)
+      )
+        throw Error("context count");
       if (!Number.isFinite(run.clock)) throw Error("clock");
     }
     return { state, recovered: false };

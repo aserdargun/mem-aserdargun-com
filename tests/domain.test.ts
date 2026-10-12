@@ -230,6 +230,24 @@ describe("persistence safety", () => {
     state.runs["preferences:selective"] = run;
     expect(decode(JSON.stringify(state)).recovered).toBe(true);
   });
+  // The assembled count is derived from recordIds, and the budget is its hard
+  // ceiling. Stored counts that disagree are not measurements, so the recovery
+  // path must reject them instead of rendering them as the task result.
+  it("rejects an assembled count that contradicts the records it lists", () => {
+    const state = initialState();
+    const run = query(execute(scenarios[0]), scenarios[0]);
+    expect(run.context?.used).toBe(run.context?.recordIds.length);
+    run.context!.used = 99;
+    state.runs["preferences:selective"] = run;
+    expect(decode(JSON.stringify(state)).recovered).toBe(true);
+  });
+  it("rejects an assembled count above the record budget", () => {
+    const state = initialState();
+    const run = query(execute(scenarios[0]), scenarios[0]);
+    run.context!.used = run.context!.budget + 1;
+    state.runs["preferences:selective"] = run;
+    expect(decode(JSON.stringify(state)).recovered).toBe(true);
+  });
 });
 
 describe("forgetting pending duplicates", () => {
