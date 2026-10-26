@@ -5,6 +5,16 @@ import type {
   MemoryPolicy,
   MemoryStatus,
 } from "./domain/model";
+
+/* The page's own description. It is part of the surface, so it has to be in
+ * the language the page is actually rendered in: the default page is English,
+ * and the Turkish entry point from the portfolio is the same document in
+ * Turkish. The Open Graph and Twitter descriptions stay English because they
+ * are read by a crawler that never runs the language switch. */
+export const pageDescription = L(
+  "aserdargun.com öğrenme sisteminde CTX ajan belleği laboratuvarı: altı sentetik senaryo, üç bellek politikası ve TR/EN deterministik deneyler.",
+  "CTX agent memory laboratory in the aserdargun.com learning system: six synthetic scenarios, three memory policies and deterministic TR/EN experiments.",
+);
 export const policyNames: Record<MemoryPolicy, ReturnType<typeof L>> = {
   session: L("Yalnızca oturum", "Session only"),
   simple: L("Basit kalıcı bellek", "Simple persistent"),

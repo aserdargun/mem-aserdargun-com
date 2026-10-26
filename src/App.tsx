@@ -21,6 +21,7 @@ import {
 import type { ExperimentRun, Language, MemoryPolicy } from "./domain/model";
 import { getScenario } from "./data/scenarios";
 import { portfolioUrl, contextUrl } from "./data/portfolio";
+import { pageDescription } from "./i18n";
 import { Controls } from "./components/Controls";
 import { Workspace } from "./components/Workspace";
 import type { View } from "./components/Workspace";
@@ -61,6 +62,14 @@ export default function App() {
   const query = customQuery ?? scenario.query[lang];
   useEffect(() => {
     document.documentElement.lang = lang;
+    /* The description belongs to the surface: it has to describe the page in
+     * the language the page is actually in. The Turkish entry point from the
+     * portfolio is this same document, and a Turkish page that still describes
+     * itself in Turkish while the default page describes itself in Turkish
+     * too is the defect — one of them is always wrong. */
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute("content", pageDescription[lang]);
   }, [lang]);
   useEffect(() => {
     if (selected && window.innerWidth <= 1200) {
