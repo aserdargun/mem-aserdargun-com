@@ -9,6 +9,7 @@ import {
   forget,
   reset,
   write,
+  DEFAULT_THRESHOLD,
 } from "./domain/engine";
 import { retrieve } from "./domain/retrieval";
 import {
@@ -546,8 +547,8 @@ export default function App() {
           </small>
           <small>
             {t(
-              "İçerik ve kaynaklar 2026-09-21 tarihinde incelendi. Bellek kuralları ve 0,65 eleme eşiği MEM’nin kendi öğretim tasarımıdır; ölçülmüş bir sonuç değildir.",
-              "Content and sources reviewed 2026-09-21. Memory rules and the 0.65 rejection threshold are MEM’s own educational design, not a measured result.",
+              `İçerik ve kaynaklar 2026-09-21 tarihinde incelendi. Bellek kuralları ve ${DEFAULT_THRESHOLD.toFixed(2).replace(".", ",")} eleme eşiği MEM’nin kendi öğretim tasarımıdır; ölçülmüş bir sonuç değildir.`,
+              `Content and sources reviewed 2026-09-21. Memory rules and the ${DEFAULT_THRESHOLD.toFixed(2)} rejection threshold are MEM’s own educational design, not a measured result.`,
             )}
           </small>
         </div>

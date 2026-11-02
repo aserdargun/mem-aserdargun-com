@@ -1,5 +1,10 @@
 import { L, START, DAY } from "../domain/model";
 import type { MemoryCandidate, Scenario } from "../domain/model";
+import {
+  DEFAULT_THRESHOLD,
+  NOISE_ACCESS_IMPORTANCE,
+  NOISE_EXPLORATION_THRESHOLD,
+} from "../domain/engine";
 const candidate = (
   id: string,
   content: ReturnType<typeof L>,
@@ -273,8 +278,8 @@ export const scenarios: Scenario[] = [
       "More records, better context?",
     ),
     lesson: L(
-      "Acil erişim ayrıntısı 0,55 önem değerinde. Seçici eşik 0,65 iken elenir ve basit bellek kazanabilir. Eşiği 0,40 yapıp deneyi sıfırlayarak tekrarları birleştirmenin etkisini inceleyin.",
-      "The urgent access detail has importance 0.55. At threshold 0.65, selective memory drops it and simple memory can win. Lower the threshold to 0.40 and reset to explore deduplication.",
+      `Acil erişim ayrıntısı ${NOISE_ACCESS_IMPORTANCE.toFixed(2).replace(".", ",")} önem değerinde. Seçici eşik ${DEFAULT_THRESHOLD.toFixed(2).replace(".", ",")} iken elenir ve basit bellek kazanabilir. Eşiği ${NOISE_EXPLORATION_THRESHOLD.toFixed(2).replace(".", ",")} yapıp deneyi sıfırlayarak tekrarları birleştirmenin etkisini inceleyin.`,
+      `The urgent access detail has importance ${NOISE_ACCESS_IMPORTANCE.toFixed(2)}. At threshold ${DEFAULT_THRESHOLD.toFixed(2)}, selective memory drops it and simple memory can win. Lower the threshold to ${NOISE_EXPLORATION_THRESHOLD.toFixed(2)} and reset to explore deduplication.`,
     ),
     events: [
       candidate(
@@ -286,7 +291,7 @@ export const scenarios: Scenario[] = [
         "access-code",
         "LIME-7",
         ["access", "code"],
-        { importance: 0.55 },
+        { importance: NOISE_ACCESS_IMPORTANCE },
       ),
       ...Array.from({ length: 5 }, (_, i) =>
         candidate(

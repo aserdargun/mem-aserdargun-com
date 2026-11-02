@@ -1,4 +1,6 @@
 import { describe, it, expect } from "vitest";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import {
   fresh,
   step,
@@ -8,6 +10,9 @@ import {
   correct,
   forget,
   reset,
+  DEFAULT_THRESHOLD,
+  NOISE_ACCESS_IMPORTANCE,
+  NOISE_EXPLORATION_THRESHOLD,
 } from "../src/domain/engine";
 import { retrieve } from "../src/domain/retrieval";
 import { compare } from "../src/domain/comparison";
@@ -264,5 +269,103 @@ describe("forgetting pending duplicates", () => {
     run = reset(run);
     while (run.cursor < scenario.events.length) run = step(run, scenario);
     expect(exportRun(run, "tr")).not.toContain("kahve");
+  });
+});
+
+describe("published numbers against enforced ones", () => {
+  it("the threshold the reader is told about is the threshold the engine enforces", () => {
+    /* The footer says the rejection threshold is 0.65, and the noise
+       scenario's lesson tells the reader that at threshold 0.65 selective
+       memory drops the access code. Both sentences described a bare literal
+       that lived in a function signature, so nothing connected them to the
+       engine: moving the default to 0.60 left the footer and the lesson
+       claiming 0.65 while the engine rejected at 0.60, and every test stayed
+       green.
+
+       The published text is now read from the named value, and this test
+       holds it there — if the number in the prose drifts from the number the
+       engine runs, the prose fails. */
+    const footer = readFileSync(
+      resolve(__dirname, "..", "src", "App.tsx"),
+      "utf8",
+    );
+    /* The footer sentence is rendered from the named value, so the source
+       carries the interpolation rather than a typed-out number. */
+    expect(
+      footer,
+      "the footer reads the threshold from the named value",
+    ).toContain("Memory rules and the ${DEFAULT_THRESHOLD.toFixed(2)} rejection threshold");
+    expect(
+      footer,
+      "the footer must not repeat the number as a literal",
+    ).not.toMatch(/Memory rules and the [\d.]+ rejection threshold/);
+    /* And the engine really does enforce that number. */
+    expect(fresh("preferences", "selective").threshold).toBe(DEFAULT_THRESHOLD);
+  });
+
+  it("the noise lesson states the importance and thresholds the scenario uses", () => {
+    /* The noise lesson names three numbers: the access detail's importance,
+       the threshold at which selective memory drops it, and the lower
+       threshold it invites the reader to try. Each one is a claim about what
+       the engine does, and each was a literal repeated in the prose. */
+    const noise = scenarios.find((s) => s.id === "noise")!;
+    const access = noise.events[0];
+    expect(access.importance).toBe(NOISE_ACCESS_IMPORTANCE);
+
+    const stated = (text: string) => text.match(/[\d]+[.,][\d]+/g) ?? [];
+    for (const lang of ["tr", "en"] as const) {
+      const numbers = stated(noise.lesson[lang]).map((n) =>
+        Number(n.replace(",", ".")),
+      );
+      expect(numbers, `noise lesson (${lang}) names the access importance`).toContain(
+        NOISE_ACCESS_IMPORTANCE,
+      );
+      expect(numbers, `noise lesson (${lang}) names the default threshold`).toContain(
+        DEFAULT_THRESHOLD,
+      );
+      expect(
+        numbers,
+        `noise lesson (${lang}) names the exploration threshold`,
+      ).toContain(NOISE_EXPLORATION_THRESHOLD);
+    }
+
+    /* The lesson's claim has to hold: at the default threshold selective
+       memory drops the access code and simple memory keeps it, and lowering
+       the threshold to the published one brings it back. */
+    const atDefault = compare(noise);
+    const selective = atDefault.find((r) => r.policy === "selective")!;
+    const simple = atDefault.find((r) => r.policy === "simple")!;
+    expect(selective.records.some((r) => r.value === "LIME-7")).toBe(false);
+    expect(simple.records.some((r) => r.value === "LIME-7")).toBe(true);
+
+    const lowered = compare(noise, NOISE_EXPLORATION_THRESHOLD);
+    expect(
+      lowered
+        .find((r) => r.policy === "selective")!
+        .records.some((r) => r.value === "LIME-7"),
+    ).toBe(true);
+  });
+
+  it("the exploration threshold is reachable on the panel's slider", () => {
+    /* The lesson invites the reader to lower the threshold to a published
+       number. The panel's slider has a fixed step, so a threshold the lesson
+       names but the slider cannot land on is an instruction the reader
+       cannot follow. */
+    const controls = readFileSync(
+      resolve(__dirname, "..", "src", "components", "Controls.tsx"),
+      "utf8",
+    );
+    const step = Number(controls.match(/step="([\d.]+)"/)?.[1]);
+    expect(Number.isFinite(step)).toBe(true);
+    for (const threshold of [
+      DEFAULT_THRESHOLD,
+      NOISE_EXPLORATION_THRESHOLD,
+      NOISE_ACCESS_IMPORTANCE,
+    ]) {
+      const steps = Math.round(threshold / step);
+      expect(Math.abs(steps * step - threshold), `${threshold} on a ${step} step`).toBeLessThan(
+        1e-9,
+      );
+    }
   });
 });

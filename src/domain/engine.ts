@@ -8,10 +8,32 @@ import type {
 } from "./model";
 import { sameScope, reconcile } from "./validity";
 import { writeDecision } from "./policies";
+
+/* The retention threshold a selective run starts with.
+ *
+ * The number is published to the reader in two places: the page footer says
+ * "the 0.65 rejection threshold", and the noise scenario's lesson tells the
+ * reader that at threshold 0.65 selective memory drops the access code. Both
+ * sentences described a bare literal that lived in this function's signature,
+ * so nothing connected the two. Changing the default to 0.60 left the footer
+ * and the lesson claiming 0.65 while the engine rejected at 0.60, and every
+ * test stayed green.
+ *
+ * It has a name now so the published text can be read against the value the
+ * engine actually enforces. */
+export const DEFAULT_THRESHOLD = 0.65;
+
+/* The threshold the noise scenario's lesson names as the one where selective
+ * memory drops the access code, and the lower threshold it invites the reader
+ * to try instead. Both are published in the lesson text and both are
+ * reachable on the panel's slider, whose step is 0.05. */
+export const NOISE_ACCESS_IMPORTANCE = 0.55;
+export const NOISE_EXPLORATION_THRESHOLD = 0.4;
+
 export function fresh(
   scenarioId: string,
   policy: MemoryPolicy = "selective",
-  threshold = 0.65,
+  threshold = DEFAULT_THRESHOLD,
 ): ExperimentRun {
   return {
     scenarioId,
